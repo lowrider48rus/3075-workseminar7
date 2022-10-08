@@ -1,16 +1,17 @@
 ﻿// Задайте двумерный массив из целых чисел. Найдите среднее арифметическое элементов в каждом столбце.
+//Convert.ToInt32(**.ToString())
 
 Console.WriteLine("Введи количество строк (m): ");
 int m = Int32.Parse(Console.ReadLine());
 Console.WriteLine("Введи количество столбцов (n): ");
 int n = Int32.Parse(Console.ReadLine());
 
-int[,] matrix = new int [m, n];
+double[,] matrix = new double [m, n];
 
 Console.WriteLine("Введи минимальное значение: ");
-int min = Int32.Parse(Console.ReadLine());
+int min = int.Parse(Console.ReadLine());
 Console.WriteLine("Введи максимальное значение: ");
-int max = Int32.Parse(Console.ReadLine());
+int max = int.Parse(Console.ReadLine());
 
 Console.WriteLine();
 Console.WriteLine("Создан массив: ");
@@ -18,13 +19,13 @@ FillArray(matrix, min, max);
 PrintArray(matrix);
 Console.WriteLine();
 Console.WriteLine("Создан массив со средними арфиметическими элементов столбцов: ");
-int[] res = average(matrix);
+double[] res = average(matrix);
 
 Console.WriteLine(String.Join(" ", res));
-void PrintArray(int[,] matr){
-    for (int i = 0; i < matr.GetLength(0); i++)
+void PrintArray(double[,] matr){
+    for (int i = 0; i < Convert.ToInt32(matr.GetLength(0).ToString()); i++)
     {
-        for (int j = 0; j < matr.GetLength(1); j++)
+        for (int j = 0; j < Convert.ToInt32(matr.GetLength(1).ToString()); j++)
         {
             Console.Write($"{matr[i, j]} ");
         }
@@ -32,11 +33,11 @@ void PrintArray(int[,] matr){
     }
 }
 
-void FillArray(int[,] matr, int min, int max)
+void FillArray(double[,] matr, int min, int max)
 {
-    for (int i = 0; i < matr.GetLength(0); i++)
+    for (int i = 0; i < Convert.ToInt32(matr.GetLength(0).ToString()); i++)
     {
-        for (int j = 0; j < matr.GetLength(1); j++)
+        for (int j = 0; j < Convert.ToInt32(matr.GetLength(1).ToString()); j++)
         {
             matr[i, j] = new Random().Next(min, max + 1);
         }
@@ -44,19 +45,19 @@ void FillArray(int[,] matr, int min, int max)
     }
 }
 
-int[] average(int[,] matr)
+double[] average(double[,] matr)
 {
-    int[] result = new int[matr.GetLength(1)];
-    for (int j = 0; j < matr.GetLength(1); j++)
+    double[] result = new double[Convert.ToInt32(matr.GetLength(1).ToString())];
+    for (int j = 0; j < Convert.ToInt32(matr.GetLength(1).ToString()); j++)
     {
-        for (int i = 0; i < matr.GetLength(0); i++)
+        for (int i = 0; i < Convert.ToInt32(matr.GetLength(0).ToString()); i++)
         {
            result[j] +=matr[i, j]; 
         }
 }
     for(int i = 0; i < result.Length; i++)
     {
-        result[i] = result[i] / matr.GetLength(0);
+        result[i] = Math.Round(result[i] / matr.GetLength(0),2);
     }
     return result;
 }
